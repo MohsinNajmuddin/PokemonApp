@@ -1,35 +1,44 @@
 // components/PokemonList.tsx
 
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { selectPokemonList } from '../store/slices/pokemonSlice';
-import { Pokemon } from '../interfaces/types';
-import { AppDispatch } from '../store/store';
-
+import { Pokemon, ListResponse } from '../interfaces/types';
+import { useGetPokemonListQuery } from '../services/pokemonApi';
+import PokemonCharacter from './PokemonCharacter';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
 
 
 interface Props {
-    onPokemonClick: (pokemon: Pokemon) => void; // Define the prop
+    onPokemonClick: (pokemon: Pokemon) => void;
 }
 
 
 const PokemonList: React.FC<Props> = ({ onPokemonClick }) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const pokemonList = useSelector(selectPokemonList);
 
+  const [pokemonList, setPokemonList] = useState<ListResponse>({results: []});
+
+  const { data, error, isLoading } = useGetPokemonListQuery();
+  
 
   useEffect(() => {
-    //dispatch(fetchPokemonList());
-  }, []);
+    setPokemonList({results: data?.results ?? []});
+  }, [data?.results]);
 
   return (
     <div>
-      <h2>Pokemon List</h2>
-      <ul>
-        {pokemonList.map((pokemon: Pokemon) => (
-          <li key={pokemon.name} onClick={() => onPokemonClick(pokemon)}>{pokemon.name}</li>
+      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        {pokemonList.results.map((pokemon: Pokemon) => (
+          <>
+            <ListItem alignItems="flex-start">
+              <PokemonCharacter pokemon={pokemon} />
+            </ListItem>
+            <Divider variant="fullWidth" component="li" />
+          </>
         ))}
-      </ul>
+      </List>
     </div>
   );
 };
