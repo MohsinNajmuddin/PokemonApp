@@ -13,7 +13,7 @@ export interface PokemonDetail {
     name: string;
     imageUrl: string;
     weight: number;
-    types: [];
+    types: string[];
     height: number;
 
 }

@@ -1,22 +1,13 @@
 // components/PokemonList.tsx
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectPokemonList } from '../store/slices/pokemonSlice';
 import { Pokemon, ListResponse } from '../interfaces/types';
 import { useGetPokemonListQuery } from '../services/pokemonApi';
 import PokemonCharacter from './PokemonCharacter';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
+import { List, ListItem, Divider } from '@mui/material';
 
 
-interface Props {
-    onPokemonClick: (pokemon: Pokemon) => void;
-}
-
-
-const PokemonList: React.FC<Props> = ({ onPokemonClick }) => {
+const PokemonList: React.FC<{}> = () => {
 
   const [pokemonList, setPokemonList] = useState<ListResponse>({results: []});
 
