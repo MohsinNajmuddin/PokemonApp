@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Pokemon, ListResponse } from '../interfaces/types';
 import { useGetPokemonListQuery } from '../services/pokemonApi';
 import PokemonCharacter from './PokemonCharacter';
-import { List, ListItem, Divider } from '@mui/material';
+import { List, ListItem, Divider, CircularProgress, Alert } from '@mui/material';
 
 
 const PokemonList: React.FC<{}> = () => {
@@ -17,6 +17,14 @@ const PokemonList: React.FC<{}> = () => {
   useEffect(() => {
     setPokemonList({results: data?.results ?? []});
   }, [data?.results]);
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (error) {
+    return <Alert severity="error">Error loading Pokémon details</Alert>;
+  }
 
   return (
     <div>

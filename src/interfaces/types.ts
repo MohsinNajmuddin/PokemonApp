@@ -1,19 +1,16 @@
-
 export interface Pokemon {
-    name: string;
-    url: string;
+  name: string;
+  url: string;
 }
 
-
 export interface ListResponse {
-    results: Pokemon[];
+  results: Pokemon[];
 }
 
 export interface PokemonDetail {
-    name: string;
-    imageUrl: string;
-    weight: number;
-    types: string[];
-    height: number;
-
+  name: string;
+  imageUrl: string;
+  weight: number;
+  types: string[];
+  height: number;
 }

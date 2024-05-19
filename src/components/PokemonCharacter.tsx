@@ -3,7 +3,7 @@ import { useGetPokemonDetailQuery } from "../services/pokemonApi"
 import { Pokemon, PokemonDetail } from '../interfaces/types';
 import extractIdFromUrl from '../utils/helper';
 
-import { ListItemText, ListItemAvatar, ListItemButton, Avatar, Dialog, DialogContent, DialogTitle, Divider, Typography}  from '@mui/material';
+import { ListItemText, ListItemAvatar, ListItemButton, Avatar, Dialog, DialogContent, DialogTitle, Divider, Typography, CircularProgress, Alert }  from '@mui/material';
 
 import { map } from "lodash";
 
@@ -30,6 +30,14 @@ const PokemonCharacter: React.FC<Props>  = ({pokemon}) => {
         }
         setPokemonData({name: data?.name, imageUrl: data?.sprites.front_default , weight: data?.weight, height: data?.height, types: typeNames});
       }, [!isLoading, !!data]);
+
+    if (isLoading) {
+        return <CircularProgress />;
+    }
+    
+    if (error) {
+        return <Alert severity="error">Error loading Pokémon details</Alert>;
+    }
 
     return (
         <>
