@@ -29,3 +29,6 @@ Run this command to install the dependencies
 
 Run this command to start the application
 
+### `npm test`
+
+Run this command to run unit tests
