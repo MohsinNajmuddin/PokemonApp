@@ -18,11 +18,14 @@
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory run the following commands:
+
+### `npm install`
+
+Run this command to install the dependencies
+
 
 ### `npm start`
 
-To run the application
-
-
+Run this command to start the application
 
